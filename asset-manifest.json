@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3cc797ab.css",
-    "main.js": "/static/js/main.69b953f6.js",
+    "main.css": "/static/css/main.4d120344.css",
+    "main.js": "/static/js/main.1356b721.js",
     "static/js/453.c5a81ad5.chunk.js": "/static/js/453.c5a81ad5.chunk.js",
     "static/media/Synthwave - Cubic Symphony.mp3": "/static/media/Synthwave - Cubic Symphony.352de87af4ec893ad976.mp3",
     "static/media/Epic Orchestral - Mindless Slaughter.mp3": "/static/media/Epic Orchestral - Mindless Slaughter.e393c10e8b00ff79eda9.mp3",
@@ -25,12 +25,12 @@
     "static/media/AngerpoiseLampshade.otf": "/static/media/AngerpoiseLampshade.b3e4ecdd9584eb566e03.otf",
     "static/media/grid2.svg": "/static/media/grid2.363bc81dfea6584c117d41fc26ce79c4.svg",
     "index.html": "/index.html",
-    "main.3cc797ab.css.map": "/static/css/main.3cc797ab.css.map",
-    "main.69b953f6.js.map": "/static/js/main.69b953f6.js.map",
+    "main.4d120344.css.map": "/static/css/main.4d120344.css.map",
+    "main.1356b721.js.map": "/static/js/main.1356b721.js.map",
     "453.c5a81ad5.chunk.js.map": "/static/js/453.c5a81ad5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3cc797ab.css",
-    "static/js/main.69b953f6.js"
+    "static/css/main.4d120344.css",
+    "static/js/main.1356b721.js"
   ]
 }
