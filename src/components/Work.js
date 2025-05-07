@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import AnimatedArrows from "./AnimatedArrows";
 import { Code, Paintbrush, Music } from "lucide-react";
 import TabContent from "./TabContent";
+import AnimatedBetas from "./AnimatedBetas";
 
 export function Work({ setActiveTab, activeTab }) {
   const [highlightStyle, setHighlightStyle] = useState({});
@@ -41,12 +41,25 @@ export function Work({ setActiveTab, activeTab }) {
 
   return (
     <div className="flex flex-col gap-12">
-      <AnimatedArrows
-        content="MY WORK"
+      <div
         className={
-          "justify-center space-x-2 text-stone-900 lg:text-2xl text-xl bg-stone-200 tracking-wider font-bold font-extrabold"
+          "flex flex-row text-xl lg:text-2xl pr-8 tracking-wider font-extrabold"
         }
-      ></AnimatedArrows>
+      >
+        <div className="w-full">
+          <AnimatedBetas
+            numBetas={10}
+            minWidth={60}
+            maxWidth={0}
+            speed={0.5}
+            skew={-60}
+            color="bg-stone-200"
+          />
+        </div>
+        <div className="text-stone-900 w-fit text-right whitespace-nowrap bg-stone-200 px-8">
+          MY WORK
+        </div>
+      </div>
 
       <div className="">
         <div className="relative grid grid-cols-3 overflow-hidden">

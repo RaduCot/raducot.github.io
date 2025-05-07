@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AnimatedArrows from "./AnimatedArrows";
 import emailjs from "emailjs-com";
+import AnimatedBetas from "./AnimatedBetas";
 
 export function Contact({ alert }) {
   const [senderEmail, setSenderEmail] = useState("");
@@ -52,12 +52,25 @@ export function Contact({ alert }) {
 
   return (
     <div className="flex flex-col gap-12">
-      <AnimatedArrows
-        content="CONTACT"
+      <div
         className={
-          "justify-center space-x-2 text-stone-900 lg:text-2xl text-xl bg-stone-200 tracking-wider font-extrabold"
+          "flex flex-row text-xl lg:text-2xl pr-8 tracking-wider font-extrabold"
         }
-      ></AnimatedArrows>
+      >
+        <div className="w-full">
+          <AnimatedBetas
+            numBetas={10}
+            minWidth={60}
+            maxWidth={0}
+            speed={0.5}
+            skew={-60}
+            color="bg-stone-200"
+          />
+        </div>
+        <div className="text-stone-900 w-fit text-right whitespace-nowrap bg-stone-200 px-8">
+          CONTACT
+        </div>
+      </div>
       <div className="flex justify-center text-stone-200 z-10 mb-12 text-xl lg:px-0 px-8">
         <div className="flex flex-col justify-self-center lg:gap-12 gap-6 grow text-neutral-400 text-center max-w-3xl">
           <div className="flex flex-row flex-wrap justify-center gap-4 text-rose-500 font-bold lg:text-4xl text-3xl">
