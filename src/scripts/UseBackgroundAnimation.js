@@ -17,13 +17,14 @@ export default function useBackgroundAnimation(
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
+  const updateCursorPosition = (event) => {
+    setCursorPosition({ x: event.clientX, y: event.clientY });
+  };
+
   useEffect(() => {
     if (isMobile) {
       return;
     }
-    const updateCursorPosition = (event) => {
-      setCursorPosition({ x: event.clientX, y: event.clientY });
-    };
 
     window.addEventListener("mousemove", updateCursorPosition);
 
@@ -40,6 +41,10 @@ export default function useBackgroundAnimation(
   const smoothedY = useRef(0);
   const lerpSpeed = 0.1;
 
+  const calculateScrollAnim = (time, scrollMult, speed, tileSize) => {
+    return (time.get() * scrollMult * speed * 0.001) % tileSize;
+  };
+
   useAnimationFrame(() => {
     if (!enabled) {
       return;
@@ -48,11 +53,20 @@ export default function useBackgroundAnimation(
     smoothedX.current = lerp(smoothedX.current, cursorPosition.x, lerpSpeed);
     smoothedY.current = lerp(smoothedY.current, cursorPosition.y, lerpSpeed);
 
-    const scrollAnimX = (time.get() * scrollMultX * speed * 0.001) % tileSize;
-    const scrollAnimY = (time.get() * scrollMultY * speed * 0.001) % tileSize;
+    const scrollAnimX = calculateScrollAnim(time, scrollMultX, speed, tileSize);
+    const scrollAnimY = calculateScrollAnim(time, scrollMultY, speed, tileSize);
 
     bgX.set(scrollAnimX + smoothedX.current * 0.05 * cursorMultX);
     bgY.set(scrollAnimY + smoothedY.current * 0.05 * cursorMultY);
-  });
+  }, [
+    enabled,
+    cursorPosition,
+    scrollMultX,
+    scrollMultY,
+    speed,
+    tileSize,
+    cursorMultX,
+    cursorMultY,
+  ]);
   return { bgX, bgY };
 }

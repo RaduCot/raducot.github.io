@@ -21,7 +21,7 @@ export function Work({ setActiveTab, activeTab }) {
 
   useEffect(() => {
     // Initialize highlight on the first element or current active tab
-    const initialIndex = ["frontend", "design", "music"].indexOf(activeTab);
+    const initialIndex = ["music", "design", "development"].indexOf(activeTab);
     if (initialIndex !== -1) {
       updateHighlight(initialIndex);
     }
@@ -44,25 +44,20 @@ export function Work({ setActiveTab, activeTab }) {
       <AnimatedArrows
         content="MY WORK"
         className={
-          "justify-center space-x-2 text-black text-2xl bg-white tracking-wider font-bold font-extrabold"
+          "justify-center space-x-2 text-stone-900 lg:text-2xl text-xl bg-stone-200 tracking-wider font-bold font-extrabold"
         }
       ></AnimatedArrows>
-      <p className="text-gray-400 text-justify tracking-wide">
-        I specialize in three main areas: frontend development, graphic design,
-        and music composition. Each of these fields allows me to express my
-        creativity in unique ways, combining technical skills with artistic
-        vision to create experiences that captivate and inspire. Here’s a brief
-        overview of each area:
-      </p>
-      <div>
-        <div className="relative grid grid-cols-3 gap-0.5 overflow-hidden">
+
+      <div className="">
+        <div className="relative grid grid-cols-3 overflow-hidden">
           {/* Animated highlight span */}
           <motion.span
-            className="absolute mix-blend-lighten z-50 top-0 left-0 h-full bg-pink-600"
+            className="absolute top-0 left-0 h-full bg-stone-200"
             animate={highlightStyle}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            //easeout transition
+            transition={{ duration: 0.3, ease: "circOut" }}
           />
-          {["frontend", "design", "music"].map((tab, index) => (
+          {["music", "design", "development"].map((tab, index) => (
             <button
               key={tab}
               ref={(el) => (buttonRefs.current[index] = el)}
@@ -70,20 +65,46 @@ export function Work({ setActiveTab, activeTab }) {
                 setActiveTab(tab);
                 updateHighlight(index);
               }}
-              className={`py-2 px-4 bg-gray-800 text-center transition duration-300 ease-in-out z-10 ${
+              className={`flex justify-center py-3 px-4 text-center font-semibold transition duration-100 ease-out z-10 ${
                 activeTab === tab
-                  ? "text-white"
-                  : "text-gray-300 hover:text-white"
+                  ? "text-stone-900"
+                  : "text-neutral-400 lg:hover:text-stone-200 lg:hover:bg-stone-800"
               }`}
             >
-              {tab === "frontend" && <Code className="inline mr-2" />}
-              {tab === "design" && <Paintbrush className="inline mr-2" />}
-              {tab === "music" && <Music className="inline mr-2" />}
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              {tab === "music" && <Music className="md:mr-2 h-full" />}
+              {tab === "design" && <Paintbrush className="md:mr-2 h-full" />}
+              {tab === "development" && <Code className="md:mr-2 h-full" />}
+              <motion.div
+                className="overflow-hidden text-clip hidden md:block w-6 pb-0.5"
+                initial={{ width: "auto" }}
+                animate={{ width: activeTab === tab ? "0%" : "auto" }}
+                transition={{ duration: 0.3, ease: [0.83, 0, 0.17, 1] }}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </motion.div>
             </button>
           ))}
         </div>
+        <div className="overflow-hidden flex flex-row justify-between bg-stone-200 text-stone-900 px-6 py-4 lg:py-6 tracking-widest font-extrabold mb-4">
+          <motion.h2
+            className="text-start lg:text-6xl text-3xl"
+            key={activeTab} // This ensures the animation runs when activeTab changes
+            initial={{ opacity: 0, x: "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "-100%" }}
+            transition={{ duration: 0.5, ease: [0.83, 0, 0.17, 1] }}
+          >
+            ▸{activeTab.toUpperCase()}
+          </motion.h2>
+        </div>
         <TabContent title={activeTab} />
+
+        <div className="flex grow mt-12 justify-center self-center w-full lg:px-0 px-8">
+          <div className="relative outline-dashed outline-1 lg:outline-2 lg:px-0 px-8 py-2 text-center lg:text-lg text-base text-stone-200 self-center w-full max-w-3xl ">
+            Note: All sections will be updated soon with more projects. Stay
+            tuned!
+          </div>
+        </div>
       </div>
     </div>
   );

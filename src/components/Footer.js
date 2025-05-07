@@ -1,21 +1,17 @@
 import React from "react";
-import emblem from "../assets/emblem.svg";
+import Logo from "./Logo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-neutral-900 text-white py-4">
-      <div className="relative text-sm container mx-auto px-4 text-center">
-        <p className="">
-          &copy; {currentYear}{" "}
-          <img
-            src={emblem}
-            alt="emblem"
-            className="h-[1em] inline-block mb-0.5"
-          />{" "}
-          Cotorceanu Radu | All Rights Reserved
-        </p>
+    <footer className="relative bg-black text-stone-200 py-2 ">
+      <div className="flex justify-center relative text-sm container mx-auto px-4 text-center max-w-3xl px-8">
+        <div className="flex flex-wrap flex-row items-center gap-1 justify-center">
+          &copy; {currentYear}
+          <Logo className="inline-block h-7 w-7 lg:h-8 lg:w-8 text-transparent fill-rose-600 z-10" />
+          <div>Cotorceanu Radu | All Rights Reserved</div>
+        </div>
       </div>
     </footer>
   );

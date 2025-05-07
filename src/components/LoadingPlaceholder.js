@@ -1,11 +1,10 @@
 import React from "react";
 
-export function LoadingPlaceholder() {
+export function LoadingPlaceholder({ color }) {
   return (
-    <div className="flex items-center justify-center text-2xl text-white font-extrabold">
-      <span className="animate-pulse">LOADING</span>
+    <div className="flex items-center justify-center text-stone-200">
       <svg
-        className="ml-2 animate-spin h-full w-8 text-pink-600"
+        className={`animate-spin h-full size-10 text-${color}`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
