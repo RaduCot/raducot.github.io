@@ -1,11 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.887d41cd.css",
-    "main.js": "/static/js/main.7f2fe51b.js",
+    "main.js": "/static/js/main.14269be7.js",
     "static/js/453.c5a81ad5.chunk.js": "/static/js/453.c5a81ad5.chunk.js",
     "static/media/Synthwave - Cubic Symphony.mp3": "/static/media/Synthwave - Cubic Symphony.352de87af4ec893ad976.mp3",
     "static/media/Epic Orchestral - Mindless Slaughter.mp3": "/static/media/Epic Orchestral - Mindless Slaughter.e393c10e8b00ff79eda9.mp3",
-    "static/media/DnB - Etherid ALPHA (ZZZ DripFest Masterpiece Award).mp3": "/static/media/DnB - Etherid ALPHA (ZZZ DripFest Masterpiece Award).77d0bcc595b9b88f8d7e.mp3",
+    "static/media/Electro - Zero Zeroes Left (ZZZ DripFest 2025).mp3": "/static/media/Electro - Zero Zeroes Left (ZZZ DripFest 2025).47b16089ab88536b259e.mp3",
+    "static/media/DnB - Etherid ALPHA (ZZZ DripFest 2024).mp3": "/static/media/DnB - Etherid ALPHA (ZZZ DripFest 2024).77d0bcc595b9b88f8d7e.mp3",
     "static/media/Post Rock - Gate of the Sun.mp3": "/static/media/Post Rock - Gate of the Sun.0757b2d1656c7c1926f0.mp3",
     "static/media/Glitch - TakeDisOut.mp3": "/static/media/Glitch - TakeDisOut.d984b85bf4b70b386644.mp3",
     "static/media/Jazz - Goofy Encounter.mp3": "/static/media/Jazz - Goofy Encounter.06f1332bfe249376eaac.mp3",
@@ -26,11 +27,11 @@
     "static/media/grid2.svg": "/static/media/grid2.363bc81dfea6584c117d41fc26ce79c4.svg",
     "index.html": "/index.html",
     "main.887d41cd.css.map": "/static/css/main.887d41cd.css.map",
-    "main.7f2fe51b.js.map": "/static/js/main.7f2fe51b.js.map",
+    "main.14269be7.js.map": "/static/js/main.14269be7.js.map",
     "453.c5a81ad5.chunk.js.map": "/static/js/453.c5a81ad5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.887d41cd.css",
-    "static/js/main.7f2fe51b.js"
+    "static/js/main.14269be7.js"
   ]
 }
