@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "set PORT=80 && react-scripts start",
-    "build": "react-scripts build && copy LICENSE build\\ && copy README.md build\\ && copy MEDIA-LICENSE build\\static\\media\\",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
