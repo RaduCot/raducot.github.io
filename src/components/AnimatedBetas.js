@@ -1,137 +1,66 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import { useBetasAnimation } from "./BetasAnimationContext";
 
 const AnimatedBetas = ({
-  numBetas = 10,
-  minWidth = 10,
-  maxWidth = 100,
-  speed = 1,
   skew = -45,
   color = "bg-stone-100",
+  flipX = false,
+  attachRef = false,
 }) => {
-  const [betas, setBetas] = useState([]);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const containerRef = useRef(null);
-  const animationRef = useRef();
-
-  // Update container width on mount and resize
-  useEffect(() => {
-    const updateWidth = () => {
-      setContainerWidth(containerRef.current?.offsetWidth || 1);
-    };
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  // Initialize betas when containerWidth changes
-  useEffect(() => {
-    if (!containerWidth) return;
-    const spacing = containerWidth / numBetas;
-    const initialBetas = Array.from({ length: numBetas }, (_, index) => {
-      const distanceFromRight = index * spacing;
-      const width =
-        minWidth + (maxWidth - minWidth) * (distanceFromRight / containerWidth);
-      const x = containerWidth - distanceFromRight - width;
-      return {
-        id: index,
-        x,
-      };
-    });
-    setBetas(initialBetas);
-  }, [containerWidth, numBetas, minWidth, maxWidth]);
-
-  // Animate betas
-  useEffect(() => {
-    if (!containerWidth) return;
-    let lastId = numBetas;
-
-    const spacing = containerWidth / numBetas;
-
-    const animate = () => {
-      setBetas((prevBetas) => {
-        const newBetas = prevBetas
-          .map((beta) => ({ ...beta, x: beta.x - speed }))
-          .filter((beta) => beta.x + maxWidth > 0);
-    
-        // Find the rightmost beta's x and its distance from the right
-        let rightmostBeta = null;
-        if (newBetas.length > 0) {
-          rightmostBeta = newBetas.reduce((a, b) => (a.x > b.x ? a : b));
-        }
-    
-        // Only add a new beta if there's enough space
-        if (
-          !rightmostBeta ||
-          containerWidth - (rightmostBeta.x + getBetaWidth(rightmostBeta.x)) >= spacing
-        ) {
-          // The new beta should be placed so its right edge aligns with the container's right edge
-          const distanceFromRight = 0;
-          const width =
-            minWidth +
-            (maxWidth - minWidth) * (distanceFromRight / containerWidth);
-          const x = containerWidth - width;
-          newBetas.push({ id: lastId++, x });
-        }
-    
-        return newBetas;
-      });
-      animationRef.current = requestAnimationFrame(animate);
-    };
-    
-    // Helper to get width based on x position
-    function getBetaWidth(x) {
-      const distanceFromRight = Math.max(0, containerWidth - x);
-      return minWidth + (maxWidth - minWidth) * (distanceFromRight / containerWidth);
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [containerWidth, numBetas, speed, maxWidth, minWidth]);
+  const { betas, containerWidth, containerRef, maxWidth, minWidth } = useBetasAnimation();
 
   return (
     <div
-      ref={containerRef}
-      className={`relative overflow-hidden h-full w-full flex items-center`}
+      ref={attachRef ? containerRef : null}
+      className="relative overflow-hidden h-full w-full flex items-center"
       style={{
-        maskImage:
-          "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)",
+        maskImage: flipX
+          ? "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)"
+          : "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)",
+        WebkitMaskImage: flipX
+          ? "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)"
+          : "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, transparent 100%)",
       }}
     >
-      {/* Animated betas */}
       {betas.map((beta) => {
-        const distanceFromRight = Math.max(0, containerWidth - beta.x);
-        const width =
-          minWidth +
-          (maxWidth - minWidth) * (distanceFromRight / containerWidth);
-
+        // Restore the original width calculation:
+        const width = Math.round(
+          maxWidth +
+            (minWidth - maxWidth) *
+              (beta.distanceFromRight / containerWidth)
+        );
+        const x = containerWidth - beta.distanceFromRight - width;
         return (
           <div
             key={beta.id}
             className="absolute top-0 bottom-0"
-            style={{ left: 0 }}
+            style={{
+              left: flipX ? "auto" : 0,
+              right: flipX ? 0 : "auto",
+              transform: flipX ? `scaleX(-1)` : "none",
+            }}
           >
             <div
               className={`absolute transition-all duration-100 ease-linear ${color}`}
               style={{
                 width: `${width}px`,
                 height: "100%",
-                transform: `translateX(${beta.x}px) skewX(${skew}deg)`,
+                transform: `translateX(${x}px) skewX(${skew}deg)`,
               }}
             />
           </div>
         );
       })}
 
-      {/* Static tail at the right edge */}
       <div
-        className={`absolute right-0 bottom-0 h-full transition-all duration-100 ease-linear ${color}`}
+        className={`absolute ${
+          flipX ? "left-0" : "right-0"
+        } bottom-0 h-full transition-all duration-100 ease-linear ${color}`}
         style={{
-          width: `${minWidth *2}px`,
-          transform: `skewX(${skew}deg)`,
-          right: `-${minWidth}px`,
+          width: `${maxWidth * 2}px`,
+          [flipX ? "left" : "right"]: `-${maxWidth}px`,
           top: 0,
+          transform: `skewX(${flipX ? -skew : skew}deg)`,
         }}
       />
     </div>

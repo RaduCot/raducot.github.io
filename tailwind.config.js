@@ -6,7 +6,7 @@ module.exports = {
       fontFamily: {
         AngerpoiseLampshade: ["AngerpoiseLampshade", "sans-serif"],
         RelishGargler: ["RelishGargler", "sans-serif"],
-      },
+      }
     },
   },
   plugins: [],

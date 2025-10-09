@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code, Paintbrush, Music } from "lucide-react";
 import TabContent from "./TabContent";
-import AnimatedBetas from "./AnimatedBetas";
+import { MovingRectangle } from "./MovingRectangle";
 
 export function Work({ setActiveTab, activeTab }) {
   const [highlightStyle, setHighlightStyle] = useState({});
@@ -41,25 +41,31 @@ export function Work({ setActiveTab, activeTab }) {
 
   return (
     <div className="flex flex-col gap-12">
-      <div
-        className={
-          "flex flex-row text-xl lg:text-2xl pr-8 tracking-wider font-extrabold"
-        }
-      >
+
+<div className="flex flex-row text-xl lg:text-2xl tracking-wider font-extrabold">
         <div className="w-full">
-          <AnimatedBetas
-            numBetas={10}
-            minWidth={60}
-            maxWidth={0}
-            speed={0.5}
-            skew={-60}
-            color="bg-stone-200"
+          <MovingRectangle
+            iterations={7}
+            duration={10}
+            startWidth={60}
+            skewAngle={45}
+            flipX={true}
           />
         </div>
-        <div className="text-stone-900 w-fit text-right whitespace-nowrap bg-stone-200 px-8">
+        <div className="text-stone-900 w-fit whitespace-nowrap bg-stone-200 ">
           MY WORK
         </div>
+        <div className="w-full">
+          <MovingRectangle
+            iterations={7}
+            duration={10}
+            startWidth={60}
+            skewAngle={-45}
+            flipX={false}
+          />
+        </div>
       </div>
+
 
       <div className="">
         <div className="relative grid grid-cols-3 overflow-hidden">

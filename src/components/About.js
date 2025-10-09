@@ -1,27 +1,31 @@
 import React from "react";
-import AnimatedArrows from "./AnimatedArrows";
-import AnimatedBetas from "./AnimatedBetas";
+import { MovingRectangle } from "./MovingRectangle";
 
 export function About() {
   return (
     <div className="flex flex-col gap-12">
-      <div
-        className={
-          "flex flex-row text-xl lg:text-2xl pr-8 tracking-wider font-extrabold"
-        }
-      >
+
+      <div className="flex flex-row text-xl lg:text-2xl tracking-wider font-extrabold">
         <div className="w-full">
-          <AnimatedBetas
-            numBetas={10}
-            minWidth={60}
-            maxWidth={0}
-            speed={0.5}
-            skew={-60}
-            color="bg-stone-200"
+          <MovingRectangle
+            iterations={7}
+            duration={10}
+            startWidth={60}
+            skewAngle={45}
+            flipX={true}
           />
         </div>
-        <div className="text-stone-900 w-fit text-right whitespace-nowrap bg-stone-200 px-8">
+        <div className="text-stone-900 w-fit whitespace-nowrap bg-stone-200 ">
           ABOUT ME
+        </div>
+        <div className="w-full">
+          <MovingRectangle
+            iterations={7}
+            duration={10}
+            startWidth={60}
+            skewAngle={-45}
+            flipX={false}
+          />
         </div>
       </div>
       <div className="flex flex-col text-neutral-400 text-justify lg:gap-12 gap-6 max-w-3xl self-center lg:px-0 px-8">
